@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>إدارة العهدة</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script type="module" src="custody.js"></script>
+</head>
+<body>
+  <header class="main-header">
+  <nav>
+    <ul>
+      <li><a href="employees.html">👷 العاملين</a></li>
+      <li><a href="custody.html">💸 المصروفات والعهدة</a></li>
+      <li><a href="#">📦 الطلبات</a></li>
+    </ul>
+  </nav>
+</header>
+  <h2>تسجيل العهدة والمصروفات</h2>
+
+  <section class="search-box">
+    <label>فلترة حسب التاريخ:</label>
+    <div style="display:flex; gap:10px">
+      <input type="date" id="filterFrom">
+      <input type="date" id="filterTo">
+      <button id="applyFilter">تطبيق الفلتر</button>
+    </div>
+  </section>
+
+  <section class="custody-section">
+    <h3>إضافة عهدة جديدة</h3>
+    <form id="custodyForm">
+      <label for="custodyName">اسم العهدة:</label>
+      <input type="text" id="custodyName" required>
+
+      <label for="custodyAmount">قيمة العهدة:</label>
+      <input type="number" id="custodyAmount" required>
+
+      <label for="custodyDate">تاريخ العهدة:</label>
+      <input type="date" id="custodyDate">
+
+      <button type="submit">تسجيل العهدة</button>
+    </form>
+  </section>
+
+  <section class="expense-section">
+    <h3>إضافة مصروف</h3>
+    <form id="expenseForm">
+      <label for="item">اسم المصروف:</label>
+      <input type="text" id="item" required>
+
+      <label for="expenseAmount">القيمة:</label>
+      <input type="number" id="expenseAmount" required>
+
+      <label for="expenseDate">التاريخ:</label>
+      <input type="date" id="expenseDate">
+
+      <label for="note">ملاحظات:</label>
+      <input type="text" id="note">
+
+      <button type="submit">إضافة المصروف</button>
+    </form>
+  </section>
+
+  <section class="report-section">
+    <h3>التقرير المالي</h3>
+    <p><strong>إجمالي العهد:</strong> <span id="totalCustodies">0</span> جنيه</p>
+    <p><strong>إجمالي المصروفات:</strong> <span id="totalExpenses">0</span> جنيه</p>
+    <p><strong>المتبقي:</strong> <span id="remaining">0</span> جنيه</p>
+    <button onclick="exportToExcel()">📤 تصدير الجدول</button>
+  </section>
+
+  <table>
+    <thead>
+      <tr>
+        <th>تاريخ</th>
+        <th>اسم المصروف</th>
+        <th>القيمة</th>
+        <th>ملاحظات</th>
+        <th>حذف</th>
+      </tr>
+    </thead>
+    <tbody id="expensesTable"></tbody>
+  </table>
+</body>
+</html>
